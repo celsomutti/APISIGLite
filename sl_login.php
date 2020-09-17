@@ -15,7 +15,7 @@
         AES_DECRYPT(tbusuarios.DES_SENHA, "' . $key . '") as DES_SENHA, tbusuarios.COD_GRUPO, tbusuarios.DOM_PRIVILEGIO, 
         tbusuarios.DOM_EXPIRA, tbusuarios.QTD_DIAS_EXPIRA, tbusuarios.DOM_PRIMEIRO_ACESSO, tbusuarios.DOM_ATIVO,  
         tbusuarios.DAT_SENHA, tbusuarios.COD_NIVEL, tbusuarios.NUM_CPF_CNPJ, tbusuarios.NOM_EXECUTOR, tbusuarios.DAT_MANUTENCAO   
-        FROM bderpsisgef.tbusuarios where tbusuarios.NUM_CPF_CNPJ = "' . $username . '" AND 
+        FROM bderpsisgef.tbusuarios where tbusuarios.DES_LOGIN = "' . $username . '" AND 
         AES_DECRYPT(tbusuarios.DES_SENHA, "' . $key . '") = "' . $password . '";';
 
         $stmt = $conn->prepare($sql);
