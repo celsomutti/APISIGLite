@@ -1,6 +1,5 @@
 <?php
 include 'sl_configuracao.php';
-ini_set('default_charset','UTF-8');
 // Check whether username or password is set from android	
 if(isset($_POST['usuario']))
 {
@@ -8,9 +7,9 @@ if(isset($_POST['usuario']))
     $usuario = $_POST['usuario'];
     
     // Query database for row exist or not
-    $sql = 'SELECT id_usuario_agente, cod_usuario, cod_agente, cod_entregador FROM tbusuariosagentes WHERE cod_usuario = :usuario';
+    $sql = 'SELECT id_usuario_agente, cod_usuario, cod_agente, cod_entregador FROM tbusuariosagentes WHERE cod_usuario = '. $usuario;
+    $conn->exec("set names utf8");
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':usuario', $usuario, PDO::PARAM_INT);
     $stmt->execute();
     if($stmt->rowCount())
     {

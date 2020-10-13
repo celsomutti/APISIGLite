@@ -17,7 +17,7 @@
         tbusuarios.DAT_SENHA, tbusuarios.COD_NIVEL, tbusuarios.NUM_CPF_CNPJ, tbusuarios.NOM_EXECUTOR, tbusuarios.DAT_MANUTENCAO   
         FROM bderpsisgef.tbusuarios where tbusuarios.DES_LOGIN = "' . $username . '" AND 
         AES_DECRYPT(tbusuarios.DES_SENHA, "' . $key . '") = "' . $password . '";';
-
+        $conn->exec("set names utf8");
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         if($stmt->rowCount())
