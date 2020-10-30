@@ -28,7 +28,8 @@ if(isset($_POST['tipo']) && isset($_POST['codigo']) && isset($_POST['dataini']) 
     {
       $foco = 'and tbentregas.cod_entregador = ' . $codigo . ' group by tbentregas.cod_entregador;';
     }
-    $sql = 'select tbentregas.cod_entregador as "Código", tbcodigosentregadores.nom_fantasia as Nome, ' . $while .' from tbentregas 
+    $sql = 'select tbentregas.cod_entregador as "Código", tbcodigosentregadores.nom_fantasia as Nome, ' . $while .
+    ', count(tbentregas.num_nossonumero) as Total from tbentregas 
     inner join tbcodigosentregadores
     on tbcodigosentregadores.cod_entregador = tbentregas.cod_entregador
     where tbentregas.dat_baixa between "' . $dataini . '" and "' . $datafim . '" ' . $foco ;
@@ -43,8 +44,7 @@ if(isset($_POST['tipo']) && isset($_POST['codigo']) && isset($_POST['dataini']) 
     } 
     elseif(!$stmt->rowCount()) 
     {
-      echo $sql;
-      //echo "false";
+      echo "false";
     }
 }
 
