@@ -22,13 +22,14 @@ if(isset($_POST['tipo']) && isset($_POST['codigo']) && isset($_POST['dataini']) 
     }
     if($tipo === 'B')
     {
-      $foco = 'and tbentregas.cod_agente = ' . $codigo . ' group by tbentregas.cod_entregador;';
+      $foco = 'and tbentregas.cod_agente = ' . $codigo . ' group by tbentregas.cod_entregador, Tipo;';
     }
     elseif($tipo ===   'E')
     {
-      $foco = 'and tbentregas.cod_entregador = ' . $codigo . ' group by tbentregas.cod_entregador;';
+      $foco = 'and tbentregas.cod_entregador = ' . $codigo . ' group by tbentregas.cod_entregador, Tipo;';
     }
-    $sql = 'select tbentregas.cod_entregador as "Código", tbcodigosentregadores.nom_fantasia as Nome, ' . $while .
+    $sql = 'select tbentregas.cod_entregador as "Código", tbcodigosentregadores.nom_fantasia as Nome, 
+    (if(tbentregas.val_verba_entregador>=15,"PESADO","LEVE")) as Tipo,' . $while .
     ', count(tbentregas.num_nossonumero) as Total from tbentregas 
     inner join tbcodigosentregadores
     on tbcodigosentregadores.cod_entregador = tbentregas.cod_entregador
