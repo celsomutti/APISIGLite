@@ -1,7 +1,7 @@
 <?php
 include 'sl_configuracao.php';
 ini_set('default_charset','UTF-8');
-// Check whether username or password is set from android	
+
 if(isset($_POST['agente']))
 {
     // Innitialize Variable
@@ -13,6 +13,7 @@ if(isset($_POST['agente']))
     DES_OBSERVACAO, DAT_CADASTRO, DAT_ALTERACAO, VAL_VERBA, DES_TIPO_CONTA, COD_BANCO, COD_AGENCIA, NUM_CONTA, 
     NOM_FAVORECIDO, NUM_CPF_CNPJ_FAVORECIDO, DES_FORMA_PAGAMENTO, COD_CENTRO_CUSTO, COD_GRUPO 
     FROM tbagentes WHERE COD_AGENTE = :agente';
+    $conn->exec("set names utf8");
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':agente', $agente, PDO::PARAM_INT);
     $stmt->execute();

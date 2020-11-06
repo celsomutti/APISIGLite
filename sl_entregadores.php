@@ -1,7 +1,6 @@
 <?php
 include 'sl_configuracao.php';
-ini_set('default_charset','UTF-8');
-// Check whether username or password is set from android	
+	
 if(isset($_POST['entregador']))
 {
     // Innitialize Variable
@@ -15,6 +14,7 @@ if(isset($_POST['entregador']))
     tbcodigosentregadores.COD_CLIENTE
     FROM bderpsisgef.tbcodigosentregadores
     WHERE tbcodigosentregadores.COD_ENTREGADOR = :entregador;';
+    $conn->exec("set names utf8");
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':entregador', $entregador, PDO::PARAM_INT);
     $stmt->execute();
