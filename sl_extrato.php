@@ -12,11 +12,11 @@
     
     if($tipo === 'B')
     {
-    $foco = 'and expressas_extrato.cod_base = ' . $codigo . ' group by expressas_extrato.val_verba; ';
+    $foco = 'and expressas_extrato.cod_base = ' . $codigo . ' group by expressas_extrato.cod_entregador, expressas_extrato.val_verba; ';
     }
     elseif($tipo ===   'E')
     {
-    $foco = 'and expressas_extrato.cod_entregador = ' . $codigo . ' group by expressas_extrato.val_verba; ';
+    $foco = 'and expressas_extrato.cod_entregador = ' . $codigo . ' group by expressas_extrato.cod_entregador, expressas_extrato.val_verba; ';
     }
     
     $sql = 'SELECT expressas_extrato.id_extrato,expressas_extrato.dat_inicio, expressas_extrato.dat_final, expressas_extrato.num_ano,
