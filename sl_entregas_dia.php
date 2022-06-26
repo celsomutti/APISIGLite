@@ -29,10 +29,13 @@ if(isset($_POST['tipo']) && isset($_POST['codigo']) && isset($_POST['dataini']) 
       $foco = 'and tbentregas.cod_entregador = ' . $codigo . ' group by tbentregas.cod_entregador, Tipo;';
     }
     $sql = 'select tbentregas.cod_entregador as "Código", tbcodigosentregadores.nom_fantasia as Nome, 
+    crm_clientes.nom_fantasia as Cliente, 
     (if(tbentregas.val_verba_entregador>=15,"PESADO","LEVE")) as Tipo,' . $while .
     ', count(tbentregas.num_nossonumero) as Total from tbentregas 
     inner join tbcodigosentregadores
     on tbcodigosentregadores.cod_entregador = tbentregas.cod_entregador
+    inner join crm_clientes
+    on crm_clientes.cod_cliente = tbentregas.cod_cliente_empresa
     where tbentregas.dat_baixa between "' . $dataini . '" and "' . $datafim . '" ' . $foco ;
     $conn->exec("set names utf8");
     $stmt = $conn->prepare($sql);
