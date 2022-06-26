@@ -26,9 +26,11 @@
     expressas_extrato.qtd_atraso, expressas_extrato.val_performance, expressas_extrato.val_producao,
     expressas_extrato.val_creditos, expressas_extrato.val_debitos, expressas_extrato.val_extravios,
     expressas_extrato.val_total_expressa, expressas_extrato.val_total_empresa, expressas_extrato.cod_cliente,
-    expressas_extrato.dat_credito, expressas_extrato.des_unique_key FROM expressas_extrato
+    expressas_extrato.dat_credito, expressas_extrato.des_unique_key, crm_clientes.nom_fantasia as nom_cliente FROM expressas_extrato
     inner join tbcodigosentregadores
     on tbcodigosentregadores.cod_entregador = expressas_extrato.cod_entregador
+    inner join crm_clientes 
+    on expressas_extrato.cod_cliente = crm_clientes.cod_cliente
     where num_ano = ' . $ano . ' and num_mes = ' . $mes . ' and num_quinzena = '. $quinzena . ' ' . $foco;
     $conn->exec("set names utf8");
     $stmt = $conn->prepare($sql);

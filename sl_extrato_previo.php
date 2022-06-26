@@ -20,10 +20,13 @@
      
      $sql = 'SELECT tbentregas.cod_entregador as "Código", tbcodigosentregadores.nom_fantasia as Nome, 
      tbentregas.val_verba_entregador as Verba, count(tbentregas.num_nossonumero) as Qtde, 
-     (tbentregas.val_verba_entregador * count(tbentregas.num_nossonumero)) as "Produção" 
+     (tbentregas.val_verba_entregador * count(tbentregas.num_nossonumero)) as "Produção",
+     crm_clientes.nom_fantasia as Cliente  
      from tbentregas 
      inner join tbcodigosentregadores
      on tbcodigosentregadores.cod_entregador = tbentregas.cod_entregador
+     inner join crm_clientes 
+     on tbentregas.cod_cliente_empresa = crm_clientes.cod_cliente
      where tbentregas.dat_baixa between "' . $dataini . '" and "' . $datafim . '" ' . $foco;
      $conn->exec("set names utf8");
      $stmt = $conn->prepare($sql);
